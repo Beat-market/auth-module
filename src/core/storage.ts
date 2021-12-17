@@ -35,6 +35,21 @@ export class Storage {
   // Universal
   // ------------------------------------
 
+  setStateAndLocalStorage<V extends unknown>(key: string, value: V): V | void {
+    // Unset null, undefined
+    if (isUnset(value)) {
+      return this.removeUniversal(key)
+    }
+
+    // Local Storage
+    this.setLocalStorage(key, value)
+
+    // Local state
+    this.setState(key, value)
+
+    return value
+  }
+
   setUniversal<V extends unknown>(key: string, value: V): V | void {
     // Unset null, undefined
     if (isUnset(value)) {
@@ -88,6 +103,20 @@ export class Storage {
 
     if (isSet(value)) {
       this.setUniversal(key, value)
+    }
+
+    return value
+  }
+
+  syncStateAndLocalStorage(key: string, defaultValue?: unknown): unknown {
+    let value = this.getUniversal(key)
+
+    if (isUnset(value) && isSet(defaultValue)) {
+      value = defaultValue
+    }
+
+    if (isSet(value)) {
+      this.setStateAndLocalStorage(key, value)
     }
 
     return value
