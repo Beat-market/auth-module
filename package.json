@@ -1,6 +1,6 @@
 {
   "name": "@fogine/nuxtjs-auth-next",
-  "version": "5.0.0-1666361484.aad8f50",
+  "version": "5.0.0-1666372554.782f8cd",
   "description": "Authentication module for Nuxt.js",
   "private": false,
   "repository": "nuxt-community/auth-module",
