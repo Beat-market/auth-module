@@ -38,7 +38,7 @@ export class Storage {
   setStateAndLocalStorage<V extends unknown>(key: string, value: V): V | void {
     // Unset null, undefined
     if (isUnset(value)) {
-      return this.removeUniversal(key)
+      return this.removeStateAndLocalStorage(key)
     }
 
     // Local Storage
@@ -120,6 +120,11 @@ export class Storage {
     }
 
     return value
+  }
+
+  removeStateAndLocalStorage(key: string): void {
+    this.removeState(key)
+    this.removeLocalStorage(key)
   }
 
   removeUniversal(key: string): void {
