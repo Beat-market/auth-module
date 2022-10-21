@@ -106,11 +106,11 @@ export class Auth {
     }
 
     // Restore strategy
-    this.$storage.syncStateAndLocalStorage('strategy', this.options.defaultStrategy)
+    this.$storage.syncUniversal('strategy', this.options.defaultStrategy)
 
     // Set default strategy if current one is invalid
     if (!this.getStrategy(false)) {
-      this.$storage.setStateAndLocalStorage('strategy', this.options.defaultStrategy)
+      this.$storage.setUniversal('strategy', this.options.defaultStrategy)
 
       // Give up if still invalid
       if (!this.getStrategy(false)) {

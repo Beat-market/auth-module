@@ -102,7 +102,13 @@ export class Storage {
     }
 
     if (isSet(value)) {
-      this.setUniversal(key, value)
+      //if we got auth._token.<strategy>=false cookie value
+      //dont set it again with the req response
+      if (value === false && this.getCookie(key) === value) {
+        this.setStateAndLocalStorage(key, value);
+      } else {
+        this.setUniversal(key, value);
+      }
     }
 
     return value
